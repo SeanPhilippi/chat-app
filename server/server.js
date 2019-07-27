@@ -23,13 +23,13 @@ const messages = [
 
 app.post('/clients', (req, res) => {
   clientId++;
-  res.send(clientID.toString());
+  res.send(clientId.toString());
 });
 
 app.post('/messages', (req, res) => {
-  console.log('req.body', req.body)
-  messages.push(req.body);
-  res.json(messages);
+  let message = req.body;
+  messages.push(message);
+  res.json(message);
 });
 
 app.get('/messages', (req, res) => {
