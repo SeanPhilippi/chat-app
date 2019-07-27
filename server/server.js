@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-console.log('app', app)
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
-app.listen(3000, () => {
-  console.log('express app listening on port 3000');
+app.listen(8080, () => {
+  console.log('express app listening on port 8080');
 })
 
 let clientId = 0;
@@ -20,11 +22,13 @@ const messages = [
 ];
 
 app.post('/clients', (req, res) => {
-  clientID++;
+  clientId++;
   res.send(clientID.toString());
 });
 
 app.post('/messages', (req, res) => {
+  console.log('req.body', req.body)
+  messages.push(req.body);
   res.json(messages);
 });
 
