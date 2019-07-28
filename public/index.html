@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <form
-    action="/"
-    method="POST"
-    onsumbit=""
-  >
-  <br> Client Name: <input type="text" name="clientName">
-  <input type="submit">
-</form>
-</head>
-<body>
-  <script src="chat.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>My Store</title>
+  </head>
+  <body>
+    <div>
+      My ID is:
+      <span id="myClientId"></span>
+    </div>
+    <form onsubmit="postMessage(event)">
+      Your Text Here: <br>
+      <input name="messageText" id="messageText" type="text">
+      <input type="submit" value="send">
+    </form>
+    <h3>Chat Messages</h3>
+
+    <div id="messages"></div>
+
+    <script src="chat.js"></script>
+  </body>
 </html>

@@ -3,9 +3,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+// this now has to be explicit, implicit extended: true is deprecated
+// this allows for parsing of nested objects vs just shallow parsing
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+// .use() is for using middlewares with Express
+// body-parser's json() method return middleware that will parse incoming req bodies into json
 app.use(bodyParser.json());
 
 // look for requested resource in /public folder and return it if found
@@ -13,6 +17,8 @@ app.use(express.static('public'));
 
 // as a last resort, return index.html
 app.get('*', (req, res) => {
+  // sends the file at the given path. .resolve() will try to combine the parameter strings into an absolute
+  // path from left to right
   res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
 
@@ -46,10 +52,10 @@ app.post('/clients', (req, res) => {
 app.post('/messages', (req, res) => {
   let message = req.body;
   messages.push(message);
-  res.json(message);
+  res.json(messages);
 });
 
 // returns the whole list of messages
 app.get('/messages', (req, res) => {
-  res.json(message);
+  res.json(messages);
 });
