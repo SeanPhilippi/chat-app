@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const path = require('path');
 
 // this now has to be explicit, implicit extended: true is deprecated
 // this allows for parsing of nested objects vs just shallow parsing
@@ -14,13 +13,6 @@ app.use(bodyParser.json());
 
 // look for requested resource in /public folder and return it if found
 app.use(express.static('public'));
-
-// as a last resort, return index.html
-app.get('*', (req, res) => {
-  // sends the file at the given path. .resolve() will try to combine the parameter strings into an absolute
-  // path from left to right
-  res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
-});
 
 app.listen(8080, () => {
   console.log('express app listening on port 8080');

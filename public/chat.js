@@ -28,7 +28,6 @@ const postMessage = (e) => {
     text: message
   }
 
-  console.log('body', body)
   fetch('/messages', {
     method: 'POST',
     headers:{
@@ -39,36 +38,28 @@ const postMessage = (e) => {
     body: JSON.stringify(body)
   })
   // call data.json() to turn the res stream into a full json document
-  // responses to fetch() are *streams* -- chunks of data sent back over the
-  // network, not simple text.  json() gathers all of those chunks and assembles
-  // them into a complete json document
+  // responses to fetch() are *streams* -- chunks of data sent back over the network, not simple text.
+  // json() gathers all of those chunks and assembles them into a complete json document
   .then(res => res.json())
   .then(messages => {
-    console.log('messages', messages);
     document.getElementById('messageText').value = '';
   });
 }
 
 const getMessages = () => {
   const messagesDiv = document.getElementById('messages');
-  fetch('/messages', {
-    headers : {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
+  fetch('/messages')
   // convert stream to json objects
   .then(res => res.json())
   // should have an array of message objects
   .then(messages => {
-    console.log('messages', messages)
     // map over these objects to create a series of divs containing the id and message text
     const messagesList = messages.map(message => {
       return `<div>${message.clientId} - ${message.text}</div>`
     })
     messagesDiv.innerHTML = messagesList.join('\n');
   });
-}
+};
 
 setInterval(() => {
   getMessages();
