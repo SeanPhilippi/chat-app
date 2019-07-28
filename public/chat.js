@@ -18,10 +18,11 @@ const setClientId = () => {
   });
 };
 
-const postMessage = (e) => {
+const postMessage = e => {
   e.preventDefault();
   let message = document.getElementById('messageText').value;
   setClientId();
+
   // build a message object wiht clientId and message
   const body = {
     clientId: myClientId,
@@ -41,7 +42,8 @@ const postMessage = (e) => {
   // responses to fetch() are *streams* -- chunks of data sent back over the network, not simple text.
   // json() gathers all of those chunks and assembles them into a complete json document
   .then(res => res.json())
-  .then(messages => {
+  .then(() => {
+    // clear input
     document.getElementById('messageText').value = '';
   });
 }
