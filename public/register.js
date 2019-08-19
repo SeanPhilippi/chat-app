@@ -26,7 +26,9 @@ function passwordError() {
 // check all inputs to make sure they are not empty
 function incompleteError() {
   let numOfFields = 0;
-  Array(document.querySelector('input')).forEach((input) => {
+  console.log('input array', Array.from(document.querySelectorAll('input')))
+  Array.from(document.querySelector('input')).forEach((input) => {
+    console.log(input.value)
     if (input.value === '') {
       numOfFields++;
       console.log(numOfFields)
